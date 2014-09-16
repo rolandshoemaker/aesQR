@@ -1,6 +1,5 @@
 from qrtools import QR
 import sys
-sys.path.append('/home/rolands/utils/dAES')
 import dAES
 
 class colors:
