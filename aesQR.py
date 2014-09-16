@@ -10,16 +10,25 @@ class colors:
 
 def hexToKey(hexKey):
 	key = []
-	for i in hexKey[0:len(hexKey):2]:
-		key.append(int(i, base=16))
+	for i in range(0, len(hexKey), 2):
+		key.append(int(hexKey[i:i+2], base=16))
 	return key
+
+def keyToHex(intKey):
+	key = []
+	for i in intKey:
+		hex_part = hex(i)
+		if len(hex_part) == 4:
+			key.append(hex_part[2:])
+		elif len(hex_part) == 3:
+			key.append("0"+hex_part[2:])
+	return "".join(key)
 
 def encode(key):
 	if isinstance(key, str):
 		int_key = hexToKey(key)
 		myCode = QR(data="/".join(map(str, int_key)),data_type="text")
 		myCode.encode()
-		print(myCode.filename)
 		return myCode.filename
 	elif isinstance(key, list):
 		str_key = "/".join(map(str, key))
